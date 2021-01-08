@@ -9,9 +9,7 @@ public class Main {
 
 		int h = Integer.parseInt(st.nextToken());
 		int w = Integer.parseInt(st.nextToken());
-		
-		int[][] array = new int[h][w];
-		
+
 		boolean contain = false;
 		int count = 0;
 
@@ -19,24 +17,19 @@ public class Main {
 			String arr = bf.readLine();
 			for (int j = 0; j < w; j++) {
 				if (arr.charAt(j) == '.' && contain == false)
-					array[i][j] = -1;
+					System.out.print("-1 ");
 				else if (arr.charAt(j) == '.' && contain == true) {
-					array[i][j] = count;
+					System.out.print(count + " ");
 					count++;
 				} else if (arr.charAt(j) == 'c') {
-					array[i][j] = 0;
+					System.out.print("0 ");
 					contain = true;
 					count = 1;
 				}
 			}
+			System.out.println();
 			count = 0;
 			contain = false;
-		}
-		
-		for(int i=0; i<h; i++) {
-			for(int j=0; j<w; j++)
-				System.out.print(array[i][j] + " ");
-			System.out.println();
 		}
 	}
 }
