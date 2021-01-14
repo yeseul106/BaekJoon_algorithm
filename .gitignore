@@ -1,0 +1,17 @@
+*.tlog
+*.sln
+*.suo
+*.db
+*.ipch
+*.vcxproj
+*.filters
+*.user
+*.recipe
+BaekJoon_algorithm_1541/BaekJoon_algorithm_1541/Debug/BaekJoon_algorithm_1541.log
+BaekJoon_algorithm_1541/BaekJoon_algorithm_1541/Debug/
+*.exe
+*.ilk
+*.pdb
+*.obj
+BaekJoon_c++/BaekJoon_algorithm_1946/BaekJoon_algorithm_1946/Debug/
+BaekJoon_c++/BaekJoon_algorithm_1339/BaekJoon_algorithm_1339/Debug/
