@@ -15,3 +15,8 @@ BaekJoon_algorithm_1541/BaekJoon_algorithm_1541/Debug/
 *.obj
 BaekJoon_c++/BaekJoon_algorithm_1946/BaekJoon_algorithm_1946/Debug/
 BaekJoon_c++/BaekJoon_algorithm_1339/BaekJoon_algorithm_1339/Debug/
+*.idb
+*.log
+*.opendb
+*.db-wal
+*.db-shm
