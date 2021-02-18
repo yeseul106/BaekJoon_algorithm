@@ -1,3 +1,4 @@
+
 /*
  * -문제: 창영이는 크로스워드 퍼즐을 만들려고 한다.
  *  두 단어 A와 B가 주어진다. A는 가로로 놓여야 하고, B는 세로로 놓여야 한다. 또, 두 단어는 서로 교차해야 한다.(정확히 한 글자를 공유해야 한다) 
@@ -9,39 +10,56 @@
  *       나머지 글자는 '.'로 출력한다.
  */
 import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.io.*;
+
 public class Main_2804 {
- 
-	   public static void main(String args[]) {
-	      Scanner s = new Scanner(System.in);
-	      String A = s.next();
-	      String B = s.next();
-	      int indexA = -1;
-	      int indexB = -1;
-	      
-	      KKK : for(int i = 0; i< A.length(); i++) {
-	         for (int j = 0; j< B.length(); j++)
-//	         System.out.println(A.charAt(i) + "  " + B.charAt(i));
-	            if ( A.charAt(i) == (B.charAt(j)) ) {
-	               indexA = i;
-	               indexB = j;
-	               break KKK;
-	            }
-	      }
-	            
-	      for(int i = 0; i< B.length(); i++) {
-	         if (i == indexB)
-	            System.out.println(A);
-	         else {
-	            for (int j = 0; j < A.length(); j++) {
-	               if ( j == indexA )
-	                  System.out.print(B.charAt(i));
-	               else
-	                  System.out.print(".");            
-	            }
-	            System.out.println();         
-	         }
-	      }
-	      
-	      s.close();
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(bf.readLine());
+		String A = st.nextToken();
+		String B = st.nextToken();
+
+//		System.out.println(A);
+//		System.out.println(B);
+		
+		int inxA = -1;
+		int inxB = -1;
+
+		//이중 for문을 이용하여 크로스 위치를 찾기
+		//여기서 내가 몰랐던 부분!! 이중for문을 어떻게 빠져나갈 수 있을까? 
+		//다음처럼 루프의 라벨을 정해주고 break 루프이름; 해주면 된다.
+		loop1:
+		for (int i = 0; i < A.length(); i++) {
+			char tmp = A.charAt(i);
+			loop2:
+			for (int j = 0; j < B.length(); j++) {
+				if (B.charAt(j) == tmp) {
+					inxB = j;
+					inxA = i;
+					break loop1;
+				}
+			}
+		}
+//		System.out.println(inxA);
+//		System.out.println(inxB);
+		
+		//출력하기
+		for(int i=0; i<B.length();i++) {
+			String result="";
+			for(int j=0; j<A.length(); j++) {
+				if(inxB==i) {
+					result+=Character.toString(A.charAt(j));
+				}
+				else {
+					if(inxA==j)
+						result+=Character.toString(B.charAt(i));
+					else
+						result+='.';
+				}
+			}
+			System.out.println(result);
+		}
 	}
 }
