@@ -20,8 +20,44 @@ N×M크기의 배열로 표현되는 미로가 있다.
 */
 
 #include <iostream>
+#include <queue>
 using namespace std;
 
 int main() {
+	int N, M;
+	int map[100][100];
+	int visit[100][100] = { 0 };
+	queue<pair<int, int>> Q = new queue<pair<int,int>>();
+
+	cin >> N >> M;
+
+	// 미로 입력 받기
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			int tmp;
+			cin >> tmp;
+
+			map[i][j] = tmp;
+		}
+	}
+
+	// 미로 탐색 하기 (BFS - 옆으로 가면서 아래로 내려가며 탐색하기)
+	int count = 0;
+
+	count++;
+	Q.push(new pair<int, int>(0, 0));
+	visit[0][0] = 1;
+
+	while(!Q.empty()){
+		pair<int, int> now = Q.front();
+		Q.pop();
+
+		for (int c = now.second; c < M; c++) {
+			if (map[now.first][c] == 1 || map[now.first+1][c]) { // 옆으로 갈 수 있음
+				Q.push(new pair<int, int>(now.first, c));
+
+			}
+		}
+	}
 
 }
