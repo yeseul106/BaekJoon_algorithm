@@ -27,7 +27,7 @@ int main() {
 	int N, M;
 	int map[100][100];
 	int visit[100][100] = { 0 };
-	queue<pair<int, int>> Q = new queue<pair<int,int>>();
+	queue<pair<int, int>> Q;
 
 	cin >> N >> M;
 
@@ -48,16 +48,21 @@ int main() {
 	Q.push(new pair<int, int>(0, 0));
 	visit[0][0] = 1;
 
-	while(!Q.empty()){
-		pair<int, int> now = Q.front();
-		Q.pop();
 
-		for (int c = now.second; c < M; c++) {
-			if (map[now.first][c] == 1 || map[now.first+1][c]) { // 옆으로 갈 수 있음
-				Q.push(new pair<int, int>(now.first, c));
+	for (int r = 0; r < N; r++) {
+		for (int c = 0; c < M; c++) {
+			if (map[r][c] == 1 && visit[r][c] == 0) {
+				Q.push(new pair<int, int>(r, c));
+				visit[r][c] == 1;
+			}
+			while (!Q.empty()) {
+				pair<int, int> now = Q.front();
+				Q.pop();
 
 			}
 		}
 	}
+
+
 
 }
