@@ -22,3 +22,6 @@ BaekJoon_c++/BaekJoon_algorithm_1339/BaekJoon_algorithm_1339/Debug/
 *.db-shm
 BaekJoon_algorithm_14503/BaekJoon_algorithm_14503/Main_14503.cpp
 BaekJoon_algorithm_2869/BaekJoon_algorithm_2869/Main_2869.cpp
+BaekJoon_c++/BaekJoon_algorithm_2178/.vs/ProjectSettings.json
+*.sqlite
+*.json
