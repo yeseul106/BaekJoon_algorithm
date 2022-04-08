@@ -20,7 +20,9 @@ int main() {
 
 	for (int i = 0; i < N; i++) {
 		int num, gold, silver, bronze;
-		scanf("%d %d %d %d", &num, &gold, &silver, &bronze);
+		// scanf("%d %d %d %d", &num, &gold, &silver, &bronze);
+		// ios_base::sync_with_stdio(0)을 쓰면 scanf와 cin 섞어서 사용불가 => 런타임 에러 발생
+		cin >> num >> gold >> silver >> bronze;
 
 		vector<int> tmp;
 		tmp.push_back(gold);
@@ -32,27 +34,25 @@ int main() {
 
 	// K 나라의 메달 수를 기준으로 비교
 	vector<int> k_vec = countries[K];
-	int isChanged[1001] = { 0 };
+	//int isChanged[1001] = { 0 };
 
 	int rank = 1;
 
-	for (int medal = 0; medal < 3; medal++) { // 금,은,동 순서로 비교
-		for (int n = 1; n <= N; n++) {
-			if (isChanged[n]==0 && k_vec.at(medal) < countries[n].at(medal)) { // n 나라가 k 나라보다 등수가 높지 않은데, k 나라가 메달이 더 적음
-				if (medal != 0){
-					if (k_vec.at(medal - 1) < countries[n].at(medal - 1)) {
-						rank++;
-						isChanged[n] = 1;
-					}
-					else {
-						continue;
-					}
-				}
-				else {
+	for (int n = 1; n <= N; n++) {
+		if (n == K)
+			continue;
+
+		if (k_vec.at(0) < countries[n].at(0)) {
+			rank++;
+		}
+		else if (k_vec.at(0) == countries[n].at(0)) {
+			if (k_vec.at(1) < countries[n].at(1)) {
+				rank++;
+			}
+			else if (k_vec.at(1) == countries[n].at(1)) {
+				if (k_vec.at(2) < countries[n].at(2)) {
 					rank++;
-					isChanged[n] = 1;
 				}
-				//cout << "medal: " << medal << " n: " << n << " rank: " << rank << endl;
 			}
 		}
 	}
