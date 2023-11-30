@@ -1,42 +1,40 @@
-public class Solution {
+class Solution {
+public int solution(String s) {
+    int answer = s.length();
+        for (int sliceSize = 1; sliceSize <= s.length()/2; sliceSize++) {
+            StringBuilder newString = new StringBuilder();
+            String beforeSliceString = "";
+            int duplicateNum = 1;
 
-    public static int solution(String s) {
-        int answer = s.length();
+            for (int idx = 0; idx < s.length(); idx += sliceSize) {
+                String sliceString = s.substring(idx, Math.min(idx + sliceSize, s.length()));
 
-        for (int size = 1; size <= s.length() / 2; size++) {
-            StringBuilder newS = new StringBuilder();
-            String before = "\n";
-            int cnt = 1;
-
-            for (int idx = 0; idx < s.length(); idx += size) {
-                String sTmp = s.substring(idx, Math.min(idx + size, s.length()));
-
-                if (!before.equals("\n")) {
-                    if (before.equals(sTmp)) {
-                        cnt++;
+                if (!beforeSliceString.equals("")) {
+                    if (beforeSliceString.equals(sliceString)) {
+                        duplicateNum++;
                     } else {
-                        if (cnt != 1)
-                            newS.append(cnt);
-                        newS.append(before);
-                        cnt = 1;
+                        if (duplicateNum != 1)
+                            newString.append(duplicateNum);
+                        newString.append(beforeSliceString);
+                        duplicateNum = 1;
                     }
                 }
 
-                if (idx + size >= s.length()) {
-                    if (cnt != 1)
-                        newS.append(cnt);
-                    newS.append(sTmp);
+                if (idx + sliceSize >= s.length()) {
+                    if (duplicateNum != 1)
+                        newString.append(duplicateNum);
+                    newString.append(sliceString);
                 }
 
-                before = sTmp;
+                beforeSliceString = sliceString;
             }
 
-            if (answer > newS.length()) {
-                answer = newS.length();
+            if (answer > newString.length()) {
+                answer = newString.length();
             }
         }
 
         return answer;
     }
-}
 
+}
