@@ -30,9 +30,11 @@ def roll_ball(x,y, dx, dy):
 
 def bfs():
     rx, ry, bx, by = get_pos()
+    visited = []
 
     q = deque()
     q.append((rx, ry, bx, by, 1))
+    visited.append((rx, ry, bx, by))
 
     while q:
         rx, ry, bx, by, result = q.popleft()
@@ -62,7 +64,9 @@ def bfs():
                     nbx -= dx[i]
                     nby -= dy[i]
 
-            q.append((nrx, nry, nbx, nby, result + 1))
+            if (nrx, nry, nbx, nby) not in visited:
+                visited.append((nrx, nry, nbx, nby))
+                q.append((nrx, nry, nbx, nby, result + 1))
     print(-1)
 
 bfs()
