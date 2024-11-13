@@ -1,50 +1,39 @@
 from itertools import combinations
 
 n, m = map(int, input().split())
-map = [list(map(int,input().split())) for _ in range(n)]
+board = [list(map(int, input().split())) for _ in range(n)]
+
+
+def find_close_chicken(house, chickens):
+    min_dist = int(1e9)
+    for chicken in chickens:
+        min_dist = min(min_dist, abs(house[0] - chicken[0]) + abs(house[1] - chicken[1]))
+    return min_dist
+
+# 일단 집 위치들이랑 치킨집 위치들 다 모아두기
+house_pos = []
 chicken_pos = []
-list_subset = []
+for i in range(n):
+    for j in range(n):
+        if board[i][j] == 1:
+            house_pos.append([i, j])
+        if board[i][j] == 2:
+            chicken_pos.append([i, j])
 
-dx = [1, -1, 0, 0]
-dy = [0, 0, -1, 1]
+# 치킨 집들 중에서 m개 뽑기
+pick_chicken_idx = []
+for num in range(1, m + 1):
+    for i in combinations(chicken_pos, num):
+        pick_chicken_idx.append(i)
 
-result = 987654321
+# print(pick_chicken_idx)
+ret = int(1e9)
 
-# 치킨 집 위치 구하기
-def find_chicken():
-    for i in range(n):
-        for j in range(n):
-            if map[i][j] == 2:
-                chicken_pos.append([i, j])
+for chickens in pick_chicken_idx:
+    sum_dist = 0
+    for house in house_pos:
+        # 집부터 각각 치킨집까지 bfs로 최단거리 구하기
+        sum_dist += find_close_chicken(house, chickens)
+    ret = min(ret, sum_dist)
 
-# m개 치킨집 선택 -> 부분 집합
-def make_subset():
-
-    # 1개부터 M개까지의 모든 조합을 구한다
-    for size in range(1, m + 1):
-        # combinations를 사용해 부분집합을 구함
-        for comb in combinations(chicken_pos, size):
-            list_subset.append(list(comb))  # 각 조합을 리스트로 변환하여 추가
-    # 결과 출력
-    # print(result)
-
-# 각 치킨집과 거리 구해서 최솟값들 더하기
-def bfs():
-    global result
-    for subset in list_subset:
-        cityDistance = 0
-        for i in range(n):
-            for j in range(n):
-                if map[i][j] == 1:
-                    x, y = i, j
-                    distance = 987654321
-                    for s in subset:
-                        distance = min(distance, abs(x-s[0]) + abs(y-s[1]))
-                    cityDistance += distance
-        result = min(result, cityDistance)
-
-find_chicken()
-make_subset()
-bfs()
-
-print(result)
+print(ret)
