@@ -42,13 +42,10 @@ def bfs(sy, sx):
 def down():
     global board
     for c in range(6):
-        cnt = 0
         q = []
 
         for r in range(12):
-            if board[r][c] == '.':
-                cnt += 1
-            else:
+            if board[r][c] != '.':
                 q.append(board[r][c])
 
         # 보드에 채우기
